@@ -1,7 +1,13 @@
 package es.enyavi.kash.infrastructure.persistence.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "CATEGORY")
 public class CategoryEntity {
@@ -14,21 +20,4 @@ public class CategoryEntity {
 
     private String icon;        // Bootstrap icon: "bi-cart3"
     private String color;       // hex: "#FF6384"
-
-    public CategoryEntity() {}
-
-    public CategoryEntity(String name, String icon, String color) {
-        this.name = name;
-        this.icon = icon;
-        this.color = color;
-    }
-
-    public Long getId() { return id; }
-    public String getName() { return name; }
-    public String getIcon() { return icon; }
-    public String getColor() { return color; }
-    public void setId(Long id) { this.id = id; }
-    public void setName(String name) { this.name = name; }
-    public void setIcon(String icon) { this.icon = icon; }
-    public void setColor(String color) { this.color = color; }
 }

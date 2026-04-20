@@ -1,7 +1,13 @@
 package es.enyavi.kash.infrastructure.persistence.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "PERSON")
 public class PersonEntity {
@@ -11,15 +17,4 @@ public class PersonEntity {
 
     @Column(nullable = false, unique = true)
     private String name;
-
-    public PersonEntity() {}
-
-    public PersonEntity(String name) {
-        this.name = name;
-    }
-
-    public Long getId() { return id; }
-    public String getName() { return name; }
-    public void setId(Long id) { this.id = id; }
-    public void setName(String name) { this.name = name; }
 }
