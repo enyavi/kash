@@ -1,23 +1,38 @@
 package es.enyavi.kash.infrastructure.persistence.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+
+import java.math.BigDecimal;
+import java.time.LocalDate;
 
 @Data
 @NoArgsConstructor
-@EqualsAndHashCode(callSuper = true)
+@AllArgsConstructor
 @Entity
-@DiscriminatorValue("WITHDRAWAL")
-public class WithdrawalEntity extends MovementEntity {
+@Table(name = "WITHDRAWAL")
+public class WithdrawalEntity {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(nullable = false)
+    private LocalDate date;
+
+    @Column(nullable = false, precision = 10, scale = 2)
+    private BigDecimal amount;
+
+    private String description;
+
+    @Column(nullable = false)
+    private boolean directExpense;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ENVELOPE_ID", nullable = false)
     private EnvelopeEntity envelope;
-
-    @Column(nullable = false)
-    private boolean directExpense;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "CATEGORY_ID")
