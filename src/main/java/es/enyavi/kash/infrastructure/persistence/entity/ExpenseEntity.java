@@ -34,8 +34,4 @@ public class ExpenseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "CATEGORY_ID", nullable = false)
     private CategoryEntity category;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "WITHDRAWAL_ID")
-    private WithdrawalEntity withdrawal;
 }

@@ -12,12 +12,14 @@ import java.time.LocalDate;
 @EqualsAndHashCode(callSuper = true)
 public class Transfer extends Movement {
     private Envelope envelope;
-    private BankAccount destination;
+    private BankAccount destinationBank;        // nullable → sobre a banco
+    private Envelope destinationEnvelope;       // nullable → sobre a sobre
 
     public Transfer(Long id, LocalDate date, BigDecimal amount, String description,
-                    Envelope envelope, BankAccount destination) {
+                    Envelope envelope, BankAccount destinationBank, Envelope destinationEnvelope) {
         super(id, date, amount, description, MovementType.TRANSFER);
         this.envelope = envelope;
-        this.destination = destination;
+        this.destinationBank = destinationBank;
+        this.destinationEnvelope = destinationEnvelope;
     }
 }

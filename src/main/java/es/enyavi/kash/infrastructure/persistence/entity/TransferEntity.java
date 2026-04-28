@@ -33,6 +33,10 @@ public class TransferEntity {
     private EnvelopeEntity envelope;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private BankAccount destination;
+    @Column(name = "DESTINATION_BANK")
+    private BankAccount destinationBank;        // nullable → sobre a banco
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "DESTINATION_ENVELOPE_ID")
+    private EnvelopeEntity destinationEnvelope; // nullable → sobre a sobre
 }

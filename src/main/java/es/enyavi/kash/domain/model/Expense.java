@@ -13,13 +13,11 @@ import java.time.LocalDate;
 public class Expense extends Movement {
     private Envelope envelope;
     private Category category;
-    private Withdrawal withdrawal;  // nullable
 
     public Expense(Long id, LocalDate date, BigDecimal amount, String description,
-                   Envelope envelope, Category category, Withdrawal withdrawal) {
+                   Envelope envelope, Category category) {
         super(id, date, amount, description, MovementType.EXPENSE);
         this.envelope = envelope;
         this.category = category;
-        this.withdrawal = withdrawal;
     }
 }
