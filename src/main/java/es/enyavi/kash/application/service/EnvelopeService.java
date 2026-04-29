@@ -14,6 +14,11 @@ public class EnvelopeService {
 
     private final EnvelopeRepository envelopeRepository;
 
+    public Envelope findById(Long id) {
+        return envelopeRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Envelope not found: " + id));
+    }
+
     public Envelope findByType(EnvelopeType type) {
         return envelopeRepository.findByType(type)
                 .orElseThrow(() -> new IllegalArgumentException("Envelope not found: " + type));
