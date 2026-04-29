@@ -1,4 +1,4 @@
-package es.enyavi.kash.infrastructure.persistence;
+package es.enyavi.kash.infrastructure.persistence.repository;
 
 import es.enyavi.kash.infrastructure.persistence.entity.EnvelopeEntity;
 import es.enyavi.kash.infrastructure.persistence.entity.EnvelopeLoadEntity;

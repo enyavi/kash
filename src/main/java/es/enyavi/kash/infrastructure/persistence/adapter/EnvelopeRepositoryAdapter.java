@@ -3,7 +3,7 @@ package es.enyavi.kash.infrastructure.persistence.adapter;
 import es.enyavi.kash.domain.model.Envelope;
 import es.enyavi.kash.domain.model.EnvelopeType;
 import es.enyavi.kash.domain.port.out.EnvelopeRepository;
-import es.enyavi.kash.infrastructure.persistence.EnvelopeJpaRepository;
+import es.enyavi.kash.infrastructure.persistence.repository.EnvelopeJpaRepository;
 import es.enyavi.kash.infrastructure.persistence.mapper.EnvelopeMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;

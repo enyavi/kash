@@ -2,10 +2,10 @@ package es.enyavi.kash.infrastructure.persistence.adapter;
 
 import es.enyavi.kash.domain.model.*;
 import es.enyavi.kash.domain.port.out.MovementRepository;
-import es.enyavi.kash.infrastructure.persistence.EnvelopeLoadJpaRepository;
-import es.enyavi.kash.infrastructure.persistence.ExpenseJpaRepository;
-import es.enyavi.kash.infrastructure.persistence.TransferJpaRepository;
-import es.enyavi.kash.infrastructure.persistence.WithdrawalJpaRepository;
+import es.enyavi.kash.infrastructure.persistence.repository.EnvelopeLoadJpaRepository;
+import es.enyavi.kash.infrastructure.persistence.repository.ExpenseJpaRepository;
+import es.enyavi.kash.infrastructure.persistence.repository.TransferJpaRepository;
+import es.enyavi.kash.infrastructure.persistence.repository.WithdrawalJpaRepository;
 import es.enyavi.kash.infrastructure.persistence.mapper.EnvelopeMapper;
 import es.enyavi.kash.infrastructure.persistence.mapper.MovementMapper;
 import lombok.RequiredArgsConstructor;

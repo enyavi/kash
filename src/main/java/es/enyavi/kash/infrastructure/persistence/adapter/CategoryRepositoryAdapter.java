@@ -2,7 +2,7 @@ package es.enyavi.kash.infrastructure.persistence.adapter;
 
 import es.enyavi.kash.domain.model.Category;
 import es.enyavi.kash.domain.port.out.CategoryRepository;
-import es.enyavi.kash.infrastructure.persistence.CategoryJpaRepository;
+import es.enyavi.kash.infrastructure.persistence.repository.CategoryJpaRepository;
 import es.enyavi.kash.infrastructure.persistence.mapper.CategoryMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
