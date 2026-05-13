@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/main}">
+
+<head>
+    <title>Dashboard</title>
+</head>
+
+<body>
+<div layout:fragment="content">
+
+    <!-- Saldos de sobres -->
+    <div class="row g-4 mb-4">
+        <div class="col-md-6">
+            <div class="card balance-card p-4">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <p class="mb-1 opacity-75"><i class="bi bi-person"></i> Sobre personal</p>
+                        <div class="balance-amount"
+                             th:text="${#numbers.formatDecimal(personalEnvelope.balance, 1, 2)} + ' €'">
+                            0,00 €
+                        </div>
+                    </div>
+                    <i class="bi bi-envelope fs-1 opacity-25"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card balance-card p-4">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <p class="mb-1 opacity-75"><i class="bi bi-people"></i> Sobre común</p>
+                        <div class="balance-amount"
+                             th:text="${#numbers.formatDecimal(sharedEnvelope.balance, 1, 2)} + ' €'">
+                            0,00 €
+                        </div>
+                    </div>
+                    <i class="bi bi-envelope fs-1 opacity-25"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Gráfico de gastos por categoría -->
+    <div class="row g-4 mb-4">
+        <div class="col-md-6">
+            <div class="card p-4">
+                <h5 class="mb-3"><i class="bi bi-pie-chart"></i> Gastos por categoría</h5>
+                <canvas id="categoryChart" height="200"></canvas>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card p-4">
+                <h5 class="mb-3"><i class="bi bi-graph-up"></i> Gastos últimos 30 días</h5>
+                <canvas id="expenseChart" height="200"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <!-- Últimos movimientos -->
+    <div class="card p-4">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h5 class="mb-0"><i class="bi bi-clock-history"></i> Últimos gastos</h5>
+            <a th:href="@{/movements}" class="btn btn-sm btn-outline-dark">Ver todos</a>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-hover align-middle">
+                <thead class="table-light">
+                <tr>
+                    <th>Fecha</th>
+                    <th>Descripción</th>
+                    <th>Categoría</th>
+                    <th>Sobre</th>
+                    <th class="text-end">Importe</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="expense : ${recentExpenses}">
+                    <td th:text="${#temporals.format(expense.date, 'dd/MM/yyyy')}"></td>
+                    <td th:text="${expense.description}"></td>
+                    <td>
+                            <span class="badge rounded-pill"
+                                  th:style="'background-color:' + ${expense.category.color}"
+                                  th:text="${expense.category.name}">
+                            </span>
+                    </td>
+                    <td th:text="${expense.envelope.type == 'SHARED' ? 'Común' : 'Personal'}"></td>
+                    <td class="text-end fw-bold"
+                        th:text="${#numbers.formatDecimal(expense.amount, 1, 2)} + ' €'">
+                    </td>
+                </tr>
+                <tr th:if="${#lists.isEmpty(recentExpenses)}">
+                    <td colspan="5" class="text-center text-muted py-4">
+                        No hay gastos registrados
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script th:inline="javascript">
+        const expenses = /*[[${recentExpenses}]]*/ [];
+
+        // Agrupar por categoría
+        const categoryTotals = {};
+        expenses.forEach(e => {
+            const cat = e.category?.name || 'Sin categoría';
+            categoryTotals[cat] = (categoryTotals[cat] || 0) + e.amount;
+        });
+
+        new Chart(document.getElementById('categoryChart'), {
+            type: 'doughnut',
+            data: {
+                labels: Object.keys(categoryTotals),
+                datasets: [{
+                    data: Object.values(categoryTotals),
+                    backgroundColor: ['#FF6384','#36A2EB','#FFCE56','#4BC0C0','#9966FF','#FF9F40']
+                }]
+            },
+            options: { plugins: { legend: { position: 'bottom' } } }
+        });
+
+        new Chart(document.getElementById('expenseChart'), {
+            type: 'bar',
+            data: {
+                labels: expenses.map(e => e.date),
+                datasets: [{
+                    label: 'Gastos €',
+                    data: expenses.map(e => e.amount),
+                    backgroundColor: '#36A2EB'
+                }]
+            },
+            options: { plugins: { legend: { display: false } } }
+        });
+    </script>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,4 @@
+2026-05-13 23:25:45.123571+02:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "SELECT * FROM CATEGORY ID [*]ENVELOPE"
+Syntax error in SQL statement "SELECT * FROM CATEGORY ID [*]ENVELOPE"; SQL statement:
+SELECT * FROM CATEGORY ID ENVELOPE [42000-224]
